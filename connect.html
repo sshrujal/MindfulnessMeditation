@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connect</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="testimonials.html">Testimonials</a></li>
+	  <li><a href="connect.html">Connect</a></li>
+    </ul>
+  </nav>
+
+  <section class="connect-section">
+    <h2>Connect with Me</h2>
+
+    <form action="https://formspree.io/f/mwpnwpea" method="POST">
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit" id="my-form-button" >Send Message</button>
+    <p id="my-form-status"></p>
+    </form>
+
+    <div class="social-links">
+      <a href="https://www.instagram.com/zentimewithshrujal" target="_blank">
+        <img src="assets/instagram.png" alt="Instagram" />
+      </a>
+      <a href="https://www.facebook.com/people/Zen-Time-With-Shrujal/100063713700162" target="_blank">
+        <img src="assets/facebook.png" alt="Facebook" />
+      </a>
+      <a href="https://youtube.com/yourchannel" target="_blank">
+        <img src="assets/youtube.png" alt="YouTube" />
+      </a>
+    </div>
+
+    <p id="responseMsg"></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Shrujal Shah</p>
+  </footer>
+</body>
+
+<!-- ...existing code... -->
+
+<!-- EmailJS SDK -->
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        document.getElementById('responseMsg').textContent = "Message sent successfully!";
+        form.reset();
+      } else {
+        response.json().then(data => {
+          document.getElementById('responseMsg').textContent = data.error || "Failed to send message. Please try again.";
+        });
+      }
+    })
+    .catch(() => {
+      document.getElementById('responseMsg').textContent = "Failed to send message. Please try again.";
+    });
+  });
+</script>
+<!-- ...existing code... -->
+
+</html>
+
